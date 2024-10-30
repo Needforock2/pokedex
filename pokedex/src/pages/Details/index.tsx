@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect } from "react";
+import  { useCallback, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { getPokemonDetails } from "../../service/api";
 import usePokemonStore from "../../store/pokemonStore";
@@ -18,14 +18,14 @@ const PokemonDetails = () => {
     if (data.status !== 200) {
       setError(data.message);
     }
-  }, [setLoading, setPokemon, setError]);
+  }, [setLoading, setPokemon, setError, name]);
 
-  const isFavorite = ()=> favorites.find(fav=>fav.id === pokemon.id)
+  const isFavorite = useCallback(()=> favorites.find(fav=>fav.id === pokemon.id),[favorites, pokemon.id])
    
   useEffect(() => {
     isFavorite()
     fetchPokemon();
-  }, [fetchPokemon]);
+  }, [fetchPokemon, isFavorite]);
 
  
   return (

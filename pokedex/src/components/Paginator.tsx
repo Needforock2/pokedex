@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { MdChevronLeft, MdChevronRight } from "react-icons/md";
 
 interface Props {
@@ -13,7 +13,7 @@ export default function Paginator({ handlePaginator, totalItems, currentPage  }:
   const totalPages = totalItems < 1 ? 1 : Math.ceil(totalItems / 20);
 
 
-  const calculatePageRange = (page: number) => {
+  const calculatePageRange = useCallback((page: number) => {
 
     if( page ===1 && totalPages === 1){
       return [1]
@@ -26,12 +26,12 @@ export default function Paginator({ handlePaginator, totalItems, currentPage  }:
     const endPage = Math.min(page + 5, totalPages);
 
     return Array.from({ length: endPage - startPage + 1 }, (_, i) => startPage + i);
-  };
+  }, [totalPages]);
 
   useEffect(() => {
 
     setPageRange(calculatePageRange(currentPage));
-  }, [currentPage, totalPages]);
+  }, [currentPage, totalPages, calculatePageRange]);
 
   const handleClick = (e: React.MouseEvent<HTMLButtonElement | HTMLAnchorElement>, page: number) => {
     e.preventDefault()

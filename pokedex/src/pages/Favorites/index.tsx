@@ -1,4 +1,4 @@
-import React from 'react'
+
 import PokemonFavoriteList from '../../components/PokemonFavoriteList'
 
 const Favorites = () => {

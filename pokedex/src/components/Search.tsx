@@ -21,8 +21,13 @@ const Search = ({ handleSearch }: Props) => {
     setSearchKey(searchKey);
     setSearchWord(searchWord);
 
-    searchWord && searchKey && setSearchTerm(searchWord);
-    searchKey && handleSearch(searchWord, searchKey);
+    if(searchKey){
+      handleSearch(searchWord, searchKey)
+      if(searchWord){
+        setSearchTerm(searchWord)
+      }
+    }
+    
   };
 
   const handleOptionSelected = (e: React.MouseEvent<HTMLLIElement>) => {

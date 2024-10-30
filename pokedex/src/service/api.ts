@@ -1,6 +1,6 @@
 import axios, { AxiosError } from "axios";
 import { Pokemon, PokemonDetails } from "../types/pokemon";
-import { PokemonElement, PokemonType } from "../types/pokemonByType";
+import { PokemonElement} from "../types/pokemonByType";
 
 export interface APIResponse {
   status: number;
@@ -18,8 +18,7 @@ export const getPokemons = async (
   currentPage?: number
 ): Promise<APIResponse> => {
   try {
-    let url;
-    url = `https://pokeapi.co/api/v2/pokemon?limit=20&offset=${
+   const url = `https://pokeapi.co/api/v2/pokemon?limit=20&offset=${
       currentPage && (currentPage - 1) * 20
     }`;
 
@@ -43,8 +42,7 @@ export const getPokemonDetails = async (
   name: string
 ): Promise<APIResponseDetails> => {
   try {
-    let url;
-    url = `https://pokeapi.co/api/v2/pokemon/${name}`;
+    const url = `https://pokeapi.co/api/v2/pokemon/${name}`;
     const response = await axios.get(url);
     return {
       status: response.status,
@@ -63,7 +61,7 @@ export const getPokemonDetails = async (
 
 export const getPaginatorData = async (): Promise<APIResponse> => {
   try {
-    let url = `https://pokeapi.co/api/v2/pokemon?limit=10000`;
+    const url = `https://pokeapi.co/api/v2/pokemon?limit=10000`;
     const response = await axios(url);
     return {
       status: response.status,
@@ -102,12 +100,13 @@ const pokemonTypes = {
   "stellar": 19
 };
 
+type PokemonTypeName = keyof typeof pokemonTypes;
 
 export const getPokemonType = async (
-  typeName: string
+  typeName: PokemonTypeName
 ): Promise<APIResponse> => {
   try {
-    let url = `https://pokeapi.co/api/v2/type/${Number(pokemonTypes[typeName])}`;
+    const url = `https://pokeapi.co/api/v2/type/${Number(pokemonTypes[typeName])}`;
     const response = await axios(url);
     const arrPokemons: PokemonElement[] = response.data.pokemon;
 

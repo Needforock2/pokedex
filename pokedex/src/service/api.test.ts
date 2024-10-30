@@ -1,5 +1,5 @@
 import axios from "axios";
-import { describe, expect, test, vi, beforeEach, it} from "vitest";
+import { describe, expect, vi, beforeEach, it} from "vitest";
 import { APIResponse, getPokemons } from "./api";
 
 vi.mock("axios");

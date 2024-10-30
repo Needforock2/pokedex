@@ -37,7 +37,7 @@ const Home = () => {
     if (pokemons.status !== 200 || paginatorData.status !== 200) {
       setError(pokemons.message || paginatorData.message);
     }
-  }, []);
+  }, [setAllPokemons, setError, setLoading, setPokemons, setTotalItems]);
 
   useEffect(() => {
     fetchPokemons();
@@ -70,7 +70,7 @@ const Home = () => {
         }
       }
     },
-    []
+    [fetchPokemons, setError, setLoading, setPokemons, setSearchTerm, setTotalItems]
   );
 
   const handlePaginator = useCallback(async (offset: number) => {
@@ -82,7 +82,7 @@ const Home = () => {
     if (resp.status !== 200) {
       setError(resp.message);
     }
-  }, []);
+  }, [setError, setLoading, setPokemons]);
 
   return (
     <div className="flex  flex-col items-center">

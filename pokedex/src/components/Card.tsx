@@ -1,6 +1,6 @@
-import React, { useEffect } from "react";
+import  { useCallback, useEffect } from "react";
 import { Pokemon } from "../types/pokemon";
-import { IoHeart, IoHeartCircleOutline, IoHeartOutline } from "react-icons/io5";
+import { IoHeart, IoHeartOutline } from "react-icons/io5";
 import usePokemonStore from "../store/pokemonStore";
 
 interface Props {
@@ -14,14 +14,14 @@ function extractNumberFromUrl(url: string): number | null {
 const Card = ({ pokemon, onClick }: Props) => {
   const { favorites } =
     usePokemonStore();
-  const isFavorite = ()=> favorites.find(fav=>fav.id === extractNumberFromUrl(
+  const isFavorite = useCallback(()=> favorites.find(fav=>fav.id === extractNumberFromUrl(
     pokemon.url
-  ))
+  )), [favorites, pokemon.url])
    
   useEffect(() => {
     isFavorite()
 
-  }, []);
+  }, [isFavorite]);
 
   return (
     <div

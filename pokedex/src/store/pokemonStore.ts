@@ -1,5 +1,5 @@
 import { create } from "zustand";
-import { Favorite, Pokemon, PokemonDetails } from "../types/pokemon";
+import { Pokemon, PokemonDetails } from "../types/pokemon";
 
 
 interface PokemonState {

@@ -1,4 +1,4 @@
-import React from "react";
+
 import usePokemonStore from "../store/pokemonStore";
 import Card from "./Card";
 import { Pokemon } from "../types/pokemon";

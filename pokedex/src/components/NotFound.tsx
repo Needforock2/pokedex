@@ -1,6 +1,6 @@
 
 import pikachuPng from '../assets/pikachu.png'
-import { Link } from 'react-router-dom'
+
 
 const NotFound = () => {
   return (
@@ -8,7 +8,7 @@ const NotFound = () => {
       <div className='w-4/12'>
         <h2 className='text-3xl '>Ooops! your search didn't return a result...</h2>
        
-      <div className='text-2xl'>Let's go back <Link to={"/"} className=' text-red font-bold'>Home</Link></div>
+      <div className='text-2xl'>Let's go back <a href={"/"} className=' text-red font-bold'>Home</a></div>
       </div>
         <img src={pikachuPng} alt="Imagen de pikachu llorando" className='w-[60vw] opacity-50'/>
     </div>

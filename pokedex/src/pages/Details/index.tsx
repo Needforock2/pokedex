@@ -1,4 +1,4 @@
-import  { useCallback, useEffect } from "react";
+import { useCallback, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { getPokemonDetails } from "../../service/api";
 import usePokemonStore from "../../store/pokemonStore";
@@ -7,29 +7,37 @@ import { IoHeart, IoHeartOutline } from "react-icons/io5";
 const PokemonDetails = () => {
   const { name } = useParams();
 
-  const { setPokemon, pokemon, isLoading, setLoading, setError, favorites, setFavorites } =
-    usePokemonStore();
+  const {
+    setPokemon,
+    pokemon,
+    isLoading,
+    setLoading,
+    favorites,
+    setFavorites,
+  } = usePokemonStore();
 
   const fetchPokemon = useCallback(async () => {
     setLoading(true);
     const data = await getPokemonDetails(name!);
     setPokemon(data.data);
     setLoading(false);
-    if (data.status !== 200) {
-      setError(data.message);
-    }
-  }, [setLoading, setPokemon, setError, name]);
+  }, [setLoading, setPokemon, name]);
 
-  const isFavorite = useCallback(()=> favorites.find(fav=>fav.id === pokemon.id),[favorites, pokemon.id])
-   
+  const isFavorite = useCallback(
+    () => favorites.find((fav) => fav.id === pokemon.id),
+    [favorites, pokemon.id]
+  );
+
   useEffect(() => {
-    isFavorite()
     fetchPokemon();
-  }, [fetchPokemon, isFavorite]);
+  }, [fetchPokemon]);
 
- 
+  useEffect(() => {
+    isFavorite();
+  }, [isFavorite]);
+
   return (
-    <div className="flex justify-center w-full items-center p-1">
+    <div data-testid='detail-wrapper' className="flex justify-center w-full items-center p-1">
       {!pokemon.name || isLoading ? (
         <div className="w-full h-[100vh] bg-white rounded-xl bg-clip-border drop-shadow-lg flex justify-center items-center m-5 ">
           Loading...
@@ -39,12 +47,19 @@ const PokemonDetails = () => {
           <div className="flex flex-col items-center rounded-[20px] md:w-[95vw] m-2 bg-white bg-clip-border p-2 shadow-lg gap-4">
             <div className="mt-2 mb-2 w-full">
               <div className="flex w-full items-center justify-between p-4">
-                {isFavorite() ?
-                <IoHeart className="text-red text-3xl hover:cursor-pointer" onClick={()=>setFavorites(pokemon)}/>
-                :
-                <IoHeartOutline className="text-red text-3xl hover:cursor-pointer" onClick={()=>setFavorites(pokemon)}/>
-                
-                }
+                {isFavorite() ? (
+                  <IoHeart
+                    data-testid="favorito"
+                    className="text-red text-3xl hover:cursor-pointer"
+                    onClick={() => setFavorites(pokemon)}
+                  />
+                ) : (
+                  <IoHeartOutline
+                    data-testid="no-favorito"
+                    className="text-red text-3xl hover:cursor-pointer"
+                    onClick={() => setFavorites(pokemon)}
+                  />
+                )}
                 <div className="px-2 text-xl font-bold text-slate-700 capitalize">
                   # {pokemon.id}
                 </div>
@@ -64,6 +79,7 @@ const PokemonDetails = () => {
                 <div className="flex justify-center gap-2">
                   {pokemon.types.map((type) => (
                     <div
+                      data-testid="type-id"
                       key={type.slot}
                       className="text-base font-medium text-navy-700 flex rounded-xl  bg-white bg-clip-border border border-gray drop-shadow-xl p-1 justify-center items-center text-center"
                     >

@@ -10,10 +10,10 @@ import { MemoryRouter } from "react-router-dom";
 describe("RootLayoyt", () => {
   it("Should Render", () => {
     render(
-      <MemoryRouter>
         <RootLayout />
-      </MemoryRouter>
-    );
+    ,{
+      "wrapper": MemoryRouter
+    });
 
     const navbar = screen.findByText("Pokédex");
     expect(navbar).toBeDefined();

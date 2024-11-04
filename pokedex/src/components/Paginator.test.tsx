@@ -1,4 +1,4 @@
-import { cleanup, fireEvent, render, screen } from "@testing-library/react";
+import { cleanup, fireEvent, render, screen, waitFor } from "@testing-library/react";
 import { describe, it, expect, afterEach, vi } from "vitest";
 import Paginator from "./Paginator";
 
@@ -50,5 +50,74 @@ describe("Paginator", () => {
     fireEvent.click(lastButton);
 
     expect(mockHandlePaginator).toBeCalledWith(5);
+  });
+  it("Should call handlePaginator  with next page number (2) if actual page is 1 when chevron-rigth button is clicked", async () => {
+    render(
+      <Paginator
+        totalItems={1302}
+        currentPage={1}
+        handlePaginator={mockHandlePaginator}
+      />
+    );
+
+    const rigthButton = screen.getByTestId('chevron-right')
+    fireEvent.click(rigthButton);
+
+    await waitFor(()=>{
+      expect(mockHandlePaginator).toHaveBeenLastCalledWith(2)
+      
+    })
+  });
+  it("Should call handlePaginator  with previous page number (2) if current page is 3 when chevron-left button is clicked", async () => {
+    render(
+      <Paginator
+        totalItems={1302}
+        currentPage={3}
+        handlePaginator={mockHandlePaginator}
+      />
+    );
+
+    const leftButton = screen.getByTestId('chevron-left')
+    fireEvent.click(leftButton);
+
+    await waitFor(()=>{
+      expect(mockHandlePaginator).toHaveBeenLastCalledWith(2)
+      
+    })
+  });
+
+  it("Should call handlePaginator  with next page number (2) if actual page is 1 when NEXT button is clicked", async () => {
+    render(
+      <Paginator
+        totalItems={1302}
+        currentPage={1}
+        handlePaginator={mockHandlePaginator}
+      />
+    );
+
+    const nextButton = screen.getByText(/next/i)
+    fireEvent.click(nextButton);
+
+    await waitFor(()=>{
+      expect(mockHandlePaginator).toHaveBeenLastCalledWith(2)
+      
+    })
+  });
+  it("Should call handlePaginator  with previous page number (2) if current page is 3 when PREVIOUS button is clicked", async () => {
+    render(
+      <Paginator
+        totalItems={1302}
+        currentPage={3}
+        handlePaginator={mockHandlePaginator}
+      />
+    );
+
+    const prevButton = screen.getByText(/previous/i)
+    fireEvent.click(prevButton);
+
+    await waitFor(()=>{
+      expect(mockHandlePaginator).toHaveBeenLastCalledWith(2)
+      
+    })
   });
 });

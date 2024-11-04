@@ -32,6 +32,7 @@ export default function Paginator({ handlePaginator, totalItems, currentPage  }:
 
     setPageRange(calculatePageRange(currentPage));
   }, [currentPage, totalPages, calculatePageRange]);
+  
 
   const handleClick = (e: React.MouseEvent<HTMLButtonElement | HTMLAnchorElement>, page: number) => {
     e.preventDefault()
@@ -77,6 +78,7 @@ export default function Paginator({ handlePaginator, totalItems, currentPage  }:
             className="isolate inline-flex -space-x-px rounded-md shadow-sm"
           >
             <button
+            data-testid='chevron-left'
               onClick={(e) => handleClick(e, currentPage-1)}
               className="relative inline-flex items-center rounded-l-md px-2 py-2 text-gray-400 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-20 focus:outline-offset-0"
               disabled={currentPage === 1}
@@ -99,6 +101,7 @@ export default function Paginator({ handlePaginator, totalItems, currentPage  }:
             ))}
 
             <button
+            data-testid='chevron-right'
               onClick={(e) => handleClick(e, currentPage+1)}
               className="relative inline-flex items-center rounded-r-md px-2 py-2 text-gray-400 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-20 focus:outline-offset-0"
               disabled={currentPage === totalPages}

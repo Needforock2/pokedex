@@ -1,4 +1,4 @@
-import axios, { Axios, AxiosError } from "axios";
+import axios, { AxiosError } from "axios";
 import { Pokemon, PokemonDetails } from "../types/pokemon";
 import { PokemonElement} from "../types/pokemonByType";
 

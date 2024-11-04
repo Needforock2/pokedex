@@ -23,6 +23,7 @@ export const getPokemons = async (
     }`;
 
     const resp = await axios.get(url);
+    console.log(resp)
     return {
       status: 200,
       message: "Success",
@@ -62,7 +63,7 @@ export const getPokemonDetails = async (
 export const getPaginatorData = async (): Promise<APIResponse> => {
   try {
     const url = `https://pokeapi.co/api/v2/pokemon?limit=10000`;
-    const response = await axios(url);
+    const response = await axios.get(url);
     return {
       status: response.status,
       message: "Success",
@@ -89,22 +90,19 @@ const pokemonTypeList = [
 
 export const getPokemonType = async (
   typeName: string
-): Promise<APIResponse> => {
-
+): Promise<APIResponse | AxiosError> => {
   const typeId = pokemonTypeList.indexOf(typeName) + 1;
-
   if (typeId <= 0) {
     return {
-      status: 400,
+      status: 404,
       message: "Invalid type name",
       data: [],
     };
   }
   try {
-    
-
     const url = `https://pokeapi.co/api/v2/type/${typeId}`;
-    const response = await axios(url);
+    const response = await axios.get(url);
+    
     const arrPokemons: PokemonElement[] = response.data.pokemon;
 
     const resp: Pokemon[] = arrPokemons.map((pokemon) => {
@@ -123,7 +121,6 @@ export const getPokemonType = async (
     return {
       status: axiosError.response?.status || 500,
       message: axiosError.message || "An error occurred",
-      data: [],
-    };
+    } as AxiosError;
   }
 };

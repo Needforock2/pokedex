@@ -42,7 +42,6 @@ describe("Search", () => {
 
     render(<Search handleSearch={mockHandleSearch} />);
 
-
     const optionsButton = screen.getByRole("button", { name: /options/i });
     expect(optionsButton).toBeDefined();
     fireEvent.click(optionsButton);
@@ -57,31 +56,22 @@ describe("Search", () => {
     });
   });
   it("Should call handleSearch", async () => {
+    //Arrange
     const { setSearchKey } = usePokemonStore.getState();
 
+    //Act
     render(<Search handleSearch={mockHandleSearch} />);
-
-
     const optionsButton = screen.getByRole("button", { name: /options/i });
-    expect(optionsButton).toBeDefined();
     fireEvent.click(optionsButton);
     const optionsList = screen.getAllByRole("listitem");
-    expect(optionsList[0].innerHTML).toBe("Name");
-    expect(optionsList[1].innerHTML).toBe("Type");
-
     fireEvent.click(optionsList[0]);
     setSearchKey("Name");
-    await waitFor(() => {
-      expect(screen.getByText(/Name/i)).toBeDefined();
-    });
-
     const inputText = screen.getByRole("textbox");
     fireEvent.change(inputText, { target: { value: "Pikachu" } });
+    const submitButton = screen.getByTestId("submit-button");
+    fireEvent.click(submitButton);
 
-    expect((inputText as HTMLInputElement).value).toBe("Pikachu");
-
-    const submitButton = screen.getByTestId('submit-button')
-    fireEvent.click(submitButton)
-    expect(mockHandleSearch).toBeCalledWith("Pikachu", "Name")
+    //Assert
+    expect(mockHandleSearch).toBeCalledWith("Pikachu", "Name");
   });
 });

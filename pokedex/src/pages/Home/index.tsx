@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useState } from "react";
 import {
+  APIResponse,
   getPaginatorData,
   getPokemons,
   getPokemonType,
@@ -17,7 +18,6 @@ const Home = () => {
     setPokemons,
     isLoading,
     setLoading,
-    setError,
     setAllPokemons,
     allPokemons,
     setSearchTerm,
@@ -34,10 +34,8 @@ const Home = () => {
     setTotalItems(paginatorData.data.length);
     setPokemons(pokemons.data);
     setLoading(false);
-    if (pokemons.status !== 200 || paginatorData.status !== 200) {
-      setError(pokemons.message || paginatorData.message);
-    }
-  }, [setAllPokemons, setError, setLoading, setPokemons, setTotalItems]);
+    
+  }, [setAllPokemons, setLoading, setPokemons, setTotalItems]);
 
   useEffect(() => {
     fetchPokemons();
@@ -46,7 +44,9 @@ const Home = () => {
   const handleSearch = useCallback(
     async (word: string, keySearch: string, allPokemonsData: Pokemon[]) => {
       setLoading(true);
+ 
       if (!word) {
+   
         fetchPokemons();
         setLoading(false);
         return;
@@ -62,15 +62,12 @@ const Home = () => {
       }
       if (keySearch === "Type") {
         const pokemons = await getPokemonType(word);
-        setTotalItems(pokemons.data.length);
-        setPokemons(pokemons.data);
+        setTotalItems((pokemons as APIResponse).data.length);
+        setPokemons((pokemons as APIResponse).data);
         setLoading(false);
-        if (pokemons.status !== 200) {
-          setError(pokemons.message);
-        }
       }
     },
-    [fetchPokemons, setError, setLoading, setPokemons, setSearchTerm, setTotalItems]
+    [fetchPokemons, setLoading, setPokemons, setSearchTerm, setTotalItems]
   );
 
   const handlePaginator = useCallback(async (offset: number) => {
@@ -79,13 +76,11 @@ const Home = () => {
     const resp = await getPokemons(offset);
     setPokemons(resp.data);
     setLoading(false);
-    if (resp.status !== 200) {
-      setError(resp.message);
-    }
-  }, [setError, setLoading, setPokemons]);
+
+  }, [ setLoading, setPokemons]);
 
   return (
-    <div className="flex  flex-col items-center">
+    <div data-testid='home-wrapper' className="flex  flex-col items-center">
       <div className="flex  flex-col items-center w-full p-3">
         <Search
           handleSearch={(word, key) => handleSearch(word, key, allPokemons)}

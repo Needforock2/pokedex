@@ -25,6 +25,7 @@ describe("Navbar", ()=>{
         )
         const title = screen.findByText(/pokédex/i)
         expect(title).toBeDefined()
+        
     })
     it("Should Navigate to Home when title is clicked", async()=>{
 

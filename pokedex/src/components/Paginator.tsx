@@ -1,13 +1,14 @@
 import React, { useState, useEffect, useCallback } from "react";
 import { MdChevronLeft, MdChevronRight } from "react-icons/md";
+import usePaginatorStore from "../store/paginatorStore";
 
 interface Props {
-  totalItems: number;
-  currentPage: number;
   handlePaginator: (offset: number) => void;
 }
 
-export default function Paginator({ handlePaginator, totalItems, currentPage  }: Props) {
+export function Paginator({ handlePaginator }: Props) {
+
+  const { totalItems, currentPage } = usePaginatorStore();
 
   const [pageRange, setPageRange] = useState<number[]>([]);
   const totalPages = totalItems < 1 ? 1 : Math.ceil(totalItems / 20);

@@ -25,28 +25,28 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>95/95</span>
+                <span class='fraction'>88/88</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>11/11</span>
+                <span class='fraction'>10/10</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">87.5% </span>
+                <span class="strong">85.71% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>7/8</span>
+                <span class='fraction'>6/7</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>95/95</span>
+                <span class='fraction'>88/88</span>
             </div>
         
             
@@ -173,14 +173,9 @@
 <a name='L108'></a><a href='#L108'>108</a>
 <a name='L109'></a><a href='#L109'>109</a>
 <a name='L110'></a><a href='#L110'>110</a>
-<a name='L111'></a><a href='#L111'>111</a>
-<a name='L112'></a><a href='#L112'>112</a>
-<a name='L113'></a><a href='#L113'>113</a>
-<a name='L114'></a><a href='#L114'>114</a>
-<a name='L115'></a><a href='#L115'>115</a>
-<a name='L116'></a><a href='#L116'>116</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
+<a name='L111'></a><a href='#L111'>111</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -191,11 +186,6 @@
 <span class="cline-any cline-yes">54x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">54x</span>
-<span class="cline-any cline-yes">4x</span>
-<span class="cline-any cline-yes">4x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">54x</span>
-<span class="cline-any cline-yes">5x</span>
 <span class="cline-any cline-yes">5x</span>
 <span class="cline-any cline-yes">5x</span>
 <span class="cline-any cline-yes">5x</span>
@@ -292,29 +282,24 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">54x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import React, { useState } from "react";
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import React, { useRef, useState } from "react";
 import usePokemonStore from "../store/pokemonStore";
 import { IoIosArrowDown } from "react-icons/io";
 &nbsp;
 interface Props {
   handleSearch: (word: string, key: string) =&gt; void;
 }
-const Search = ({ handleSearch }: Props) =&gt; {
+export const Search = ({ handleSearch }: Props) =&gt; {
+  const inputRef = useRef&lt;HTMLInputElement&gt;(null);
   const { setSearchKey, setSearchTerm, searchKey } = usePokemonStore();
   const [isOpen, setIsOpen] = useState(false);
-  const [searchWord, setSearchWord] = useState("");
-&nbsp;
-  const handleChange = (e: React.ChangeEvent&lt;HTMLInputElement&gt;) =&gt; {
-    setSearchWord(e.target.value);
-  };
-&nbsp;
+ 
   const handleSubmit = (
     e: React.MouseEvent&lt;HTMLButtonElement | HTMLAnchorElement&gt;
   ) =&gt; {
     e.preventDefault();
-    setSearchKey(searchKey);
-    setSearchWord(searchWord);
+    const searchWord = inputRef.current?.value || "";
 &nbsp;
     handleSearch(searchWord, searchKey);
     if (searchWord) {
@@ -345,7 +330,7 @@ const Search = ({ handleSearch }: Props) =&gt; {
             data-dropdown-toggle="dropdown"
             className="z-10 w-5/12 lg:w-3/12 flex items-center flex-grow-0 bg-white border justify-evenly p-0 font-medium text-center text-gray-900 bg-gray-100   hover:bg-gray-200 focus:ring-4 focus:outline-none focus:ring-gray-100 dark:bg-gray-700 dark:hover:bg-gray-600 dark:focus:ring-gray-700 text-red dark:border-gray-600"
           &gt;
-            {searchKey === "" ? "Options" : searchKey}
+            {searchKey || "Options"}
             &lt;IoIosArrowDown className="text-lg " /&gt;
           &lt;/button&gt;
           {isOpen &amp;&amp; (
@@ -371,11 +356,11 @@ const Search = ({ handleSearch }: Props) =&gt; {
           )}
           &lt;div className="relative w-7/12 lg:w-9/12"&gt;
             &lt;input
+            ref={inputRef}
               type="text"
               id="search-dropdown"
               className="block p-2.5 w-full z-20 text-sm text-gray-900 bg-white rounded-e-lg focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-s-gray-700  dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:border-blue-500"
               placeholder="Search..."
-              onChange={handleChange}
               required
             /&gt;
             &lt;button
@@ -407,7 +392,7 @@ const Search = ({ handleSearch }: Props) =&gt; {
   );
 };
 &nbsp;
-export default Search;
+&nbsp;
 &nbsp;</pre></td></tr></table></pre>
 
                 <div class='push'></div><!-- for sticky footer -->
@@ -415,7 +400,7 @@ export default Search;
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2024-11-04T20:14:02.478Z
+                at 2024-11-06T13:17:56.620Z
             </div>
         <script src="../../../prettify.js"></script>
         <script>

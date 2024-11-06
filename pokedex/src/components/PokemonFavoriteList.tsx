@@ -1,11 +1,12 @@
 
+import { Card } from ".";
 import usePokemonStore from "../store/pokemonStore";
-import Card from "./Card";
+
 import { Pokemon } from "../types/pokemon";
 import { useNavigate } from "react-router-dom";
 
 
-const PokemonFavoriteList = () => {
+export const PokemonFavoriteList = () => {
   const navigate = useNavigate();
   const { favorites } = usePokemonStore();
   const handleNavigate = (pokemon: Pokemon) => {
@@ -30,4 +31,4 @@ const PokemonFavoriteList = () => {
   );
 };
 
-export default PokemonFavoriteList;
+

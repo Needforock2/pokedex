@@ -25,7 +25,7 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>150/150</span>
+                <span class='fraction'>152/152</span>
             </div>
         
             
@@ -46,7 +46,7 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>150/150</span>
+                <span class='fraction'>152/152</span>
             </div>
         
             
@@ -232,7 +232,11 @@
 <a name='L167'></a><a href='#L167'>167</a>
 <a name='L168'></a><a href='#L168'>168</a>
 <a name='L169'></a><a href='#L169'>169</a>
-<a name='L170'></a><a href='#L170'>170</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+<a name='L170'></a><a href='#L170'>170</a>
+<a name='L171'></a><a href='#L171'>171</a>
+<a name='L172'></a><a href='#L172'>172</a>
+<a name='L173'></a><a href='#L173'>173</a>
+<a name='L174'></a><a href='#L174'>174</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
@@ -273,11 +277,14 @@
 <span class="cline-any cline-yes">26x</span>
 <span class="cline-any cline-yes">26x</span>
 <span class="cline-any cline-yes">26x</span>
+<span class="cline-any cline-yes">26x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">26x</span>
+<span class="cline-any cline-yes">26x</span>
 <span class="cline-any cline-yes">10x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">10x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">16x</span>
 <span class="cline-any cline-yes">16x</span>
 <span class="cline-any cline-yes">16x</span>
 <span class="cline-any cline-yes">16x</span>
@@ -389,13 +396,14 @@
 <span class="cline-any cline-yes">16x</span>
 <span class="cline-any cline-yes">96x</span>
 <span class="cline-any cline-yes">96x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">96x</span>
 <span class="cline-any cline-yes">96x</span>
-<span class="cline-any cline-yes">16x</span>
 <span class="cline-any cline-yes">16x</span>
 <span class="cline-any cline-yes">16x</span>
 <span class="cline-any cline-yes">16x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">26x</span>
 <span class="cline-any cline-yes">26x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">26x</span>
@@ -440,14 +448,17 @@ const PokemonDetails = () =&gt; {
   }, [isFavorite]);
 &nbsp;
   return (
-    &lt;div data-testid='detail-wrapper' className="flex justify-center w-full items-center p-1"&gt;
-      {!pokemon.name || isLoading ? (
-        &lt;div className="w-full h-[100vh] bg-white rounded-xl bg-clip-border drop-shadow-lg flex justify-center items-center m-5 "&gt;
-          Loading...
-        &lt;/div&gt;
-      ) : (
-        &lt;div className="flex mt-5 flex-col items-center text-slate-800 w-full"&gt;
-          &lt;div className="flex flex-col items-center rounded-[20px] md:w-[95vw] m-2 bg-white bg-clip-border p-2 shadow-lg gap-4"&gt;
+    &lt;div
+      data-testid="detail-wrapper"
+      className="flex justify-center w-full items-center p-1"
+    &gt;
+      &lt;div className="flex mt-5 flex-col items-center  text-slate-800 w-full"&gt;
+        {!pokemon.name || isLoading ? (
+          &lt;div className="w-full max-w-[95vw] min-h-[100vh] bg-white rounded-xl bg-clip-border drop-shadow-lg flex justify-center items-center m-5 "&gt;
+            Loading...
+          &lt;/div&gt;
+        ) : (
+          &lt;div className="flex flex-col items-center rounded-[20px] md:w-[95vw]  max-w-[95vw] w-full m-2 bg-white bg-clip-border p-2 shadow-lg gap-4 max-w min-h-[80vh]"&gt;
             &lt;div className="mt-2 mb-2 w-full"&gt;
               &lt;div className="flex w-full items-center justify-between p-4"&gt;
                 {isFavorite() ? (
@@ -558,13 +569,14 @@ const PokemonDetails = () =&gt; {
               {pokemon.stats.map((stat) =&gt; (
                 &lt;div key={stat.stat.name} className="flex gap-2 justify-center"&gt;
                   &lt;div className="capitalize"&gt;{stat.stat.name}: &lt;/div&gt;
+&nbsp;
                   &lt;div&gt;{stat.base_stat}&lt;/div&gt;
                 &lt;/div&gt;
               ))}
             &lt;/div&gt;
           &lt;/div&gt;
-        &lt;/div&gt;
-      )}
+        )}
+      &lt;/div&gt;
     &lt;/div&gt;
   );
 };
@@ -577,7 +589,7 @@ export default PokemonDetails;
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2024-11-04T20:14:02.478Z
+                at 2024-11-06T13:17:56.620Z
             </div>
         <script src="../../../../prettify.js"></script>
         <script>

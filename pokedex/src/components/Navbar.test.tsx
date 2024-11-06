@@ -1,7 +1,8 @@
 import { fireEvent, render, screen } from "@testing-library/react";
 import { MemoryRouter } from "react-router-dom";
 import { describe, it, expect, beforeEach, vi } from "vitest";
-import Navbar from "./Navbar";
+import { Navbar } from "./Navbar";
+
 
 vi.mock('react-router-dom', async () => {
     const actual = await vi.importActual('react-router-dom');

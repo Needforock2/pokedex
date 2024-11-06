@@ -4,7 +4,7 @@ import type { PokemonDetails, Sprites } from "./../../types/pokemon";
 import { fireEvent, render, screen } from "@testing-library/react";
 import Favorites from ".";
 import { MemoryRouter } from "react-router-dom";
-import PokemonFavoriteList from "../../components/PokemonFavoriteList";
+import { PokemonFavoriteList } from "../../components";
 
 const mockPokemon: PokemonDetails = {
   abilities: [],

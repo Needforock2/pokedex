@@ -32,6 +32,7 @@ const mockPokemons = [
     url: "https://pokeapi.co/api/v2/pokemon/3/",
   },
 ];
+
 const mockIcePokemons = [
   {
     name: "ivysaur",
@@ -76,7 +77,7 @@ describe("Home", () => {
   });
 
   test("Should  make a Get to fetch pokemons", async () => {
-    expect(getPokemons).toHaveBeenCalledWith();
+    expect(getPokemons).toHaveBeenCalledWith(1);
   });
 
   test("Should render the search bar", async () => {

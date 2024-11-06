@@ -4,7 +4,7 @@ import { IoHeart,} from "react-icons/io5";
 import { useNavigate } from "react-router-dom";
 
 
-const Navbar = () => {
+export const Navbar = () => {
   const navigate = useNavigate()
   return (
     <div className=" flex items-center justify-between mx-3">
@@ -19,4 +19,4 @@ const Navbar = () => {
   );
 };
 
-export default Navbar;
+

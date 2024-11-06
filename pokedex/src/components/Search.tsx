@@ -1,25 +1,20 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import usePokemonStore from "../store/pokemonStore";
 import { IoIosArrowDown } from "react-icons/io";
 
 interface Props {
   handleSearch: (word: string, key: string) => void;
 }
-const Search = ({ handleSearch }: Props) => {
+export const Search = ({ handleSearch }: Props) => {
+  const inputRef = useRef<HTMLInputElement>(null);
   const { setSearchKey, setSearchTerm, searchKey } = usePokemonStore();
   const [isOpen, setIsOpen] = useState(false);
-  const [searchWord, setSearchWord] = useState("");
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setSearchWord(e.target.value);
-  };
-
+ 
   const handleSubmit = (
     e: React.MouseEvent<HTMLButtonElement | HTMLAnchorElement>
   ) => {
     e.preventDefault();
-    setSearchKey(searchKey);
-    setSearchWord(searchWord);
+    const searchWord = inputRef.current?.value || "";
 
     handleSearch(searchWord, searchKey);
     if (searchWord) {
@@ -50,7 +45,7 @@ const Search = ({ handleSearch }: Props) => {
             data-dropdown-toggle="dropdown"
             className="z-10 w-5/12 lg:w-3/12 flex items-center flex-grow-0 bg-white border justify-evenly p-0 font-medium text-center text-gray-900 bg-gray-100   hover:bg-gray-200 focus:ring-4 focus:outline-none focus:ring-gray-100 dark:bg-gray-700 dark:hover:bg-gray-600 dark:focus:ring-gray-700 text-red dark:border-gray-600"
           >
-            {searchKey === "" ? "Options" : searchKey}
+            {searchKey || "Options"}
             <IoIosArrowDown className="text-lg " />
           </button>
           {isOpen && (
@@ -76,11 +71,11 @@ const Search = ({ handleSearch }: Props) => {
           )}
           <div className="relative w-7/12 lg:w-9/12">
             <input
+            ref={inputRef}
               type="text"
               id="search-dropdown"
               className="block p-2.5 w-full z-20 text-sm text-gray-900 bg-white rounded-e-lg focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-s-gray-700  dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:border-blue-500"
               placeholder="Search..."
-              onChange={handleChange}
               required
             />
             <button
@@ -112,4 +107,4 @@ const Search = ({ handleSearch }: Props) => {
   );
 };
 
-export default Search;
+

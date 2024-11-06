@@ -1,5 +1,5 @@
+import { PokemonFavoriteList } from "../../components"
 
-import PokemonFavoriteList from '../../components/PokemonFavoriteList'
 
 const Favorites = () => {
   return (

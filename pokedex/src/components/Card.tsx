@@ -11,7 +11,7 @@ function extractNumberFromUrl(url: string): number | null {
   const match = url.match(/\/(\d+)\/?$/);
   return match ? parseInt(match[1], 10) : null;
 }
-const Card = ({ pokemon, onClick }: Props) => {
+export const Card = ({ pokemon, onClick }: Props) => {
   const { favorites } =
     usePokemonStore();
   const isFavorite = useCallback(()=> favorites.find(fav=>fav.id === extractNumberFromUrl(
@@ -49,4 +49,4 @@ const Card = ({ pokemon, onClick }: Props) => {
   );
 };
 
-export default Card;
+

@@ -7,8 +7,8 @@ import {
 } from "@testing-library/react";
 
 import { describe, it, expect, afterEach, vi, beforeEach } from "vitest";
-import Search from "./Search";
 import usePokemonStore from "../store/pokemonStore";
+import { Search } from "./Search";
 
 const mockHandleSearch = vi.fn();
 

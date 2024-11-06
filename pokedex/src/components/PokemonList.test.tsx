@@ -1,9 +1,9 @@
 import { cleanup, fireEvent, render, screen } from "@testing-library/react";
 import { MemoryRouter } from "react-router-dom";
 import { describe, it, expect, afterEach, vi, beforeEach } from "vitest";
-import PokemonList from "./PokemonList";
 import { Pokemon} from "../types/pokemon";
 import usePokemonStore from "../store/pokemonStore";
+import { PokemonList } from "./PokemonList";
 
 const mockPokemons: Pokemon[] = [
   {
@@ -27,6 +27,7 @@ vi.mock("react-router-dom", async () => {
 const mockNavigate = vi.fn();
 
 describe("Pokemon List", () => {
+  
   beforeEach(() => {
     usePokemonStore.setState({ pokemons: [] });
     mockNavigate.mockClear();

@@ -7,4 +7,5 @@ export default defineConfig({
   test: {
     environment: 'jsdom', // Aquí especificas jsdom como el entorno de prueba
   },
+
 })

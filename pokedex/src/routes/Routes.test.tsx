@@ -4,8 +4,9 @@ import { test, describe, expect, afterEach } from "vitest";
 import Home from "../pages/Home";
 import Favorites from "../pages/Favorites";
 import PokemonDetails from "../pages/Details";
-import NotFound from "../components/NotFound";
+
 import RootLayout from "../layouts/RootLayout";
+import { NotFound } from "../components";
 
 const routes = [
   {

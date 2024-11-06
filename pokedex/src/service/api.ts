@@ -23,7 +23,6 @@ export const getPokemons = async (
     }`;
 
     const resp = await axios.get(url);
-    console.log(resp)
     return {
       status: 200,
       message: "Success",

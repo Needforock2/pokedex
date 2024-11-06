@@ -4,8 +4,8 @@ import type { PokemonDetails, Sprites } from "./../types/pokemon";
 import { render, screen } from "@testing-library/react";
 
 import { MemoryRouter } from "react-router-dom";
+import { Card } from "./Card";
 
-import Card from "./Card";
 
 const mockPokemon: PokemonDetails = {
   abilities: [],

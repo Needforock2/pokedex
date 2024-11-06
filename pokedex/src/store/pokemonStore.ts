@@ -25,7 +25,7 @@ export const usePokemonStore = create<PokemonState>((set, get) => ({
   pokemons: [],
   allPokemons:[] ,
   pokemon: {} as PokemonDetails,
-  isLoading: false,
+  isLoading: true,
   error: null,
   searchKey: "",
   searchTerm: "",

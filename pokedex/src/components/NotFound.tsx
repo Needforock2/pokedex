@@ -2,7 +2,7 @@
 import pikachuPng from '../assets/pikachu.png'
 
 
-const NotFound = () => {
+export const NotFound = () => {
   return (
     <div className="bg-white m-2 mx-3 rounded-xl bg-clip-border p-1 drop-shadow-lg w-full flex items-center justify-center">
       <div className='w-4/12'>
@@ -15,4 +15,3 @@ const NotFound = () => {
   )
 }
 
-export default NotFound

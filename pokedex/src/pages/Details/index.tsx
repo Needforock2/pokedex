@@ -37,14 +37,17 @@ const PokemonDetails = () => {
   }, [isFavorite]);
 
   return (
-    <div data-testid='detail-wrapper' className="flex justify-center w-full items-center p-1">
-      {!pokemon.name || isLoading ? (
-        <div className="w-full h-[100vh] bg-white rounded-xl bg-clip-border drop-shadow-lg flex justify-center items-center m-5 ">
-          Loading...
-        </div>
-      ) : (
-        <div className="flex mt-5 flex-col items-center text-slate-800 w-full">
-          <div className="flex flex-col items-center rounded-[20px] md:w-[95vw] m-2 bg-white bg-clip-border p-2 shadow-lg gap-4">
+    <div
+      data-testid="detail-wrapper"
+      className="flex justify-center w-full items-center p-1"
+    >
+      <div className="flex mt-5 flex-col items-center  text-slate-800 w-full">
+        {!pokemon.name || isLoading ? (
+          <div className="w-full max-w-[95vw] min-h-[100vh] bg-white rounded-xl bg-clip-border drop-shadow-lg flex justify-center items-center m-5 ">
+            Loading...
+          </div>
+        ) : (
+          <div className="flex flex-col items-center rounded-[20px] md:w-[95vw]  max-w-[95vw] w-full m-2 bg-white bg-clip-border p-2 shadow-lg gap-4 max-w min-h-[80vh]">
             <div className="mt-2 mb-2 w-full">
               <div className="flex w-full items-center justify-between p-4">
                 {isFavorite() ? (
@@ -155,13 +158,14 @@ const PokemonDetails = () => {
               {pokemon.stats.map((stat) => (
                 <div key={stat.stat.name} className="flex gap-2 justify-center">
                   <div className="capitalize">{stat.stat.name}: </div>
+
                   <div>{stat.base_stat}</div>
                 </div>
               ))}
             </div>
           </div>
-        </div>
-      )}
+        )}
+      </div>
     </div>
   );
 };

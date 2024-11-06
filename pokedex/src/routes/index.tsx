@@ -7,7 +7,8 @@ import Home from "../pages/Home";
 import RootLayout from "../layouts/RootLayout";
 import Favorites from "../pages/Favorites";
 import PokemonDetails from "../pages/Details";
-import NotFound from "../components/NotFound";
+import { NotFound } from "../components";
+
 
 export const router = createBrowserRouter(
   createRoutesFromElements(

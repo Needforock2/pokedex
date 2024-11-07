@@ -5,7 +5,7 @@ import { Navbar } from '../components'
 
 const RootLayout = () => {
   return (
-    <div className='bg-red min-h-[100vh] flex flex-col min-w-[98vw]'>
+    <div className='bg-red min-h-[100vh] flex flex-col min-w-[100vw]'>
     <Navbar/>
     <Outlet/>
     </div>

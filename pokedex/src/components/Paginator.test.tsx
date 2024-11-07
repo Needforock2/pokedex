@@ -60,13 +60,9 @@ describe("Paginator", () => {
     });
   });
   it("Should call handlePaginator  with previous page number (2) if current page is 3 when chevron-left button is clicked", async () => {
-    setTotalItems(1302)
-    setCurrentPage(3)
-    render(
-      <Paginator
-        handlePaginator={mockHandlePaginator}
-      />
-    );
+    setTotalItems(1302);
+    setCurrentPage(3);
+    render(<Paginator handlePaginator={mockHandlePaginator} />);
 
     const leftButton = screen.getByTestId("chevron-left");
     fireEvent.click(leftButton);
@@ -77,13 +73,9 @@ describe("Paginator", () => {
   });
 
   it("Should call handlePaginator  with next page number (2) if actual page is 1 when NEXT button is clicked", async () => {
-    setTotalItems(1302)
-    setCurrentPage(1)
-    render(
-      <Paginator
-        handlePaginator={mockHandlePaginator}
-      />
-    );
+    setTotalItems(1302);
+    setCurrentPage(1);
+    render(<Paginator handlePaginator={mockHandlePaginator} />);
 
     const nextButton = screen.getByText(/next/i);
     fireEvent.click(nextButton);
@@ -93,14 +85,9 @@ describe("Paginator", () => {
     });
   });
   it("Should call handlePaginator  with previous page number (2) if current page is 3 when PREVIOUS button is clicked", async () => {
-    setTotalItems(1302)
-    setCurrentPage(3)
-    render(
-      <Paginator
-
-        handlePaginator={mockHandlePaginator}
-      />
-    );
+    setTotalItems(1302);
+    setCurrentPage(3);
+    render(<Paginator handlePaginator={mockHandlePaginator} />);
 
     const prevButton = screen.getByText(/previous/i);
     fireEvent.click(prevButton);

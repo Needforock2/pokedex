@@ -24,7 +24,7 @@ const PokemonDetails = () => {
     setLoading(true);
     const data = await getPokemonDetails(name!);
     setPokemon(data.data);
-    setColor(data.data.types[0].type.name)
+    setColor(data.data.types[0].type.name);
     setLoading(false);
   }, [setLoading, setPokemon, name]);
 
@@ -41,8 +41,6 @@ const PokemonDetails = () => {
     isFavorite();
   }, [isFavorite]);
 
- 
-
   return (
     <div
       data-testid="detail-wrapper"
@@ -56,25 +54,28 @@ const PokemonDetails = () => {
         ) : (
           <div className="relative w-full max-w-full mx-auto">
             <div className="absolute left-1/2 bottom-0 z-1 w-full max-w-[98vw]  h-[80%] bg-gray rounded-2xl transform -translate-x-1/2 p-6">
-            {isFavorite() ? (
-                    <IoHeart
-                      data-testid="favorito"
-                      className="text-red text-4xl hover:cursor-pointer"
-                      
-                      onClick={() => setFavorites(pokemon)}
-                    />
-                  ) : (
-                    <IoHeartOutline
-                      data-testid="no-favorito"
-                      className="text-red text-4xl hover:cursor-pointer"
-                      onClick={() => setFavorites(pokemon)}
-                    />
-                  )}</div>
+              {isFavorite() ? (
+                <IoHeart
+                  data-testid="favorito"
+                  className="text-red text-4xl hover:cursor-pointer"
+                  onClick={() => setFavorites(pokemon)}
+                />
+              ) : (
+                <IoHeartOutline
+                  data-testid="no-favorito"
+                  className="text-red text-4xl hover:cursor-pointer"
+                  onClick={() => setFavorites(pokemon)}
+                />
+              )}
+            </div>
 
             <div className="flex flex-col items-center w-full h-full bg-clip-border gap-2">
               <div className="mt-2 mb-2 w-full">
                 <div className="flex w-full items-center justify-between p-4">
-                  <IoMdArrowBack className="text-white text-4xl hover:cursor-pointer" onClick={()=>navigate(-1)}/>
+                  <IoMdArrowBack
+                    className="text-white text-4xl hover:cursor-pointer"
+                    onClick={() => navigate(-1)}
+                  />
                   <div className="p-2 text-3xl text-white text-slate-700 capitalize z-20 font-extrabold">
                     {pokemon.name}
                   </div>
@@ -105,7 +106,9 @@ const PokemonDetails = () => {
                   </div>
                 </div>
               </div>
-                    <p className={`z-20 text-${color} text-2xl font-bold p-3`}>About</p>
+              <p className={`z-20 text-${color} text-2xl font-bold p-3`}>
+                About
+              </p>
               <div className="flex flex-wrap gap-6 rounded-2xl px-3 py-1 z-20 w-full max-w-[95vw] justify-around items-start">
                 <div className="flex flex-col justify-center items-center">
                   <p className="text-sm text-gray-600">Weight</p>
@@ -133,7 +136,11 @@ const PokemonDetails = () => {
 
               <div className="flex flex-wrap gap-1 justify-between z-20">
                 <div className="flex flex-col justify-center px-3 py-2 w-full md:w-[48%] ">
-                  <p className={`text-xl font-medium text-navy-700 text-${color}`}>Regular Sprites</p>
+                  <p
+                    className={`text-xl font-medium text-navy-700 text-${color}`}
+                  >
+                    Regular Sprites
+                  </p>
                   <div className="flex justify-center max-w-full">
                     <img
                       src={pokemon.sprites.front_default}
@@ -149,7 +156,11 @@ const PokemonDetails = () => {
                 </div>
 
                 <div className="flex flex-col justify-center px-3 py-2 w-full md:w-[48%] ">
-                  <p className={`text-xl font-medium text-navy-700 text-${color}`}>Shiny Sprites</p>
+                  <p
+                    className={`text-xl font-medium text-navy-700 text-${color}`}
+                  >
+                    Shiny Sprites
+                  </p>
                   <div className="flex justify-center max-w-full">
                     <img
                       src={pokemon.sprites.front_shiny}
@@ -165,17 +176,28 @@ const PokemonDetails = () => {
                 </div>
               </div>
 
-              <div className="flex flex-col justify-center w-full py-2 z-20 max-w-[95vw]">
-                <p className={`text-xl font-medium text-navy-700 text-${color}`}>
-                  Base Stats
-                </p>
+              <p
+                className={`text-xl mb-2 font-medium text-navy-700 z-20 text-${color}`}
+              >
+                Base Stats
+              </p>
+              <div className="flex flex-col justify-between py-2 z-20 mb-2  w-full md:w-[70vw] max-w-[95vw]">
                 {pokemon.stats.map((stat) => (
                   <div
                     key={stat.stat.name}
-                    className="flex gap-2 justify-center"
+                    className="flex gap-2 justify-between items-center px-5  "
                   >
-                    <div className="capitalize">{stat.stat.name}:</div>
-                    <div>{stat.base_stat}</div>
+                    <div className="flex w-6/12 justify-between">
+                      <div className="capitalize">{stat.stat.name}:</div>
+                      <div>{stat.base_stat}</div>
+                    </div>
+
+                    <div className="w-6/12 bg-light rounded-full h-2.5 m-2">
+                      <div
+                        className={`bg-${color} h-2.5 rounded-full`}
+                        style={{ width: `${stat.base_stat}%`, maxWidth: "120%" }}
+                      ></div>
+                    </div>
                   </div>
                 ))}
               </div>

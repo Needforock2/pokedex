@@ -1,6 +1,6 @@
 import axios, { AxiosError } from "axios";
 import { Pokemon, PokemonDetails } from "../types/pokemon";
-import { PokemonElement} from "../types/pokemonByType";
+import { PokemonElement } from "../types/pokemonByType";
 
 export interface APIResponse {
   status: number;
@@ -14,11 +14,17 @@ export interface APIResponseDetails {
   data: PokemonDetails;
 }
 
+const errorResp = (axiosError: AxiosError) => ({
+  status: axiosError.response?.status || 500,
+  message: axiosError.message || "An error occurred",
+  data: [],
+});
+
 export const getPokemons = async (
   currentPage?: number
 ): Promise<APIResponse> => {
   try {
-   const url = `https://pokeapi.co/api/v2/pokemon?limit=20&offset=${
+    const url = `https://pokeapi.co/api/v2/pokemon?limit=20&offset=${
       currentPage && (currentPage - 1) * 20
     }`;
 
@@ -30,11 +36,7 @@ export const getPokemons = async (
     };
   } catch (error) {
     const axiosError = error as AxiosError;
-    return {
-      status: axiosError.response?.status || 500,
-      message: axiosError.message || "An error occurred",
-      data: [],
-    };
+    return errorResp(axiosError);
   }
 };
 
@@ -70,22 +72,31 @@ export const getPaginatorData = async (): Promise<APIResponse> => {
     };
   } catch (error) {
     const axiosError = error as AxiosError;
-    return {
-      status: axiosError.response?.status || 500,
-      message: axiosError.message || "An error occurred",
-      data: [],
-    };
+    return errorResp(axiosError);
   }
 };
 
 const pokemonTypeList = [
-  "normal", "fighting", "flying", "poison", "ground",
-  "rock", "bug", "ghost", "steel", "fire",
-  "water", "grass", "electric", "psychic", "ice",
-  "dragon", "dark", "fairy", "stellar"
+  "normal",
+  "fighting",
+  "flying",
+  "poison",
+  "ground",
+  "rock",
+  "bug",
+  "ghost",
+  "steel",
+  "fire",
+  "water",
+  "grass",
+  "electric",
+  "psychic",
+  "ice",
+  "dragon",
+  "dark",
+  "fairy",
+  "stellar",
 ];
-
-
 
 export const getPokemonType = async (
   typeName: string
@@ -101,7 +112,7 @@ export const getPokemonType = async (
   try {
     const url = `https://pokeapi.co/api/v2/type/${typeId}`;
     const response = await axios.get(url);
-    
+
     const arrPokemons: PokemonElement[] = response.data.pokemon;
 
     const resp: Pokemon[] = arrPokemons.map((pokemon) => {

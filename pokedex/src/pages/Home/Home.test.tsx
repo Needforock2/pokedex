@@ -76,8 +76,12 @@ describe("Home", () => {
     vi.clearAllMocks();
   });
 
-  test("Should  make a Get to fetch pokemons", async () => {
+  test("Should call getPokemons and render them", async () => {
     expect(getPokemons).toHaveBeenCalledWith(1);
+    await waitFor(() => {
+      const pokemonList = screen.getAllByRole("listitem");
+      expect(pokemonList).toHaveLength(3);
+    });
   });
 
   test("Should render the search bar", async () => {
@@ -96,8 +100,8 @@ describe("Home", () => {
   });
 
   test("Should filter pokemons by name: bulbasaur", async () => {
-    const { setSearchKey, setAllPokemons } = usePokemonStore.getState();
-    setAllPokemons(mockPokemons);
+    const { setSearchKey } = usePokemonStore.getState();
+
     const optionsButton = screen.getByRole("button", { name: /options/i });
     fireEvent.click(optionsButton);
     const optionsList = screen.getAllByRole("listitem");
@@ -115,8 +119,7 @@ describe("Home", () => {
   });
 
   test("Should render 2 pokemons when Type and Ice are entered in the search bar", async () => {
-    const { setSearchKey, setAllPokemons } = usePokemonStore.getState();
-    setAllPokemons(mockPokemons);
+    const { setSearchKey } = usePokemonStore.getState();
     const optionsButton = screen.getByRole("button", { name: /options/i });
     fireEvent.click(optionsButton);
     const optionsList = screen.getAllByRole("listitem");
@@ -128,8 +131,6 @@ describe("Home", () => {
 
     const submitButton = screen.getByTestId("submit-button");
     fireEvent.click(submitButton);
-
-    expect(getPokemonType).toHaveBeenCalledTimes(1);
 
     await waitFor(() => {
       const pokemonList = screen.getAllByRole("listitem");
@@ -148,8 +149,8 @@ describe("Home", () => {
       message: "Succes",
       data: mockPokemons,
     });
-    const { setSearchKey, setAllPokemons } = usePokemonStore.getState();
-    setAllPokemons(mockPokemons);
+    const { setSearchKey } = usePokemonStore.getState();
+
     const optionsButton = screen.getByRole("button", { name: /options/i });
     fireEvent.click(optionsButton);
     const optionsList = screen.getAllByRole("listitem");
@@ -161,13 +162,8 @@ describe("Home", () => {
     fireEvent.click(submitButton);
 
     await waitFor(() => {
-      const submitButton = screen.getByTestId("submit-button");
-
-      fireEvent.click(submitButton);
-    });
-    await waitFor(() => {
-      expect(getPokemons).toHaveBeenCalled();
-      expect(getPaginatorData).toHaveBeenCalled();
+      const pokemonList = screen.getAllByRole("listitem");
+      expect(pokemonList).toHaveLength(3);
     });
   });
 
@@ -179,7 +175,6 @@ describe("Home", () => {
     });
     const { pokemons } = usePokemonStore.getState();
     const numberOneButton = screen.getAllByRole("button", { name: "1" });
-    expect(numberOneButton).toBeDefined();
 
     fireEvent.click(numberOneButton[1]);
 

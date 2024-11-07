@@ -11,6 +11,10 @@
   align-items: center;
 }
 
+html, body {
+  overflow-x: hidden;
+}
+
 .logo {
   height: 6em;
   padding: 1.5em;
@@ -46,3 +50,47 @@
 .read-the-docs {
   color: #888;
 }
+
+.bg-red { background-color: #DC0A2D; }
+.bg-white { background-color: #ffffff; }
+.bg-gray { background-color: #EFEFEF; }
+.bg-bug { background-color: #A7B723; }
+.bg-dark { background-color: #75574C; }
+.bg-dragon { background-color: #7037FF; }
+.bg-electric { background-color: #F9CF30; }
+.bg-fairy { background-color: #E69EAC; }
+.bg-fighting { background-color: #C12239; }
+.bg-fire { background-color: #F57D31; }
+.bg-flying { background-color: #A891EC; }
+.bg-ghost { background-color: #70559B; }
+.bg-normal { background-color: #AAA67F; }
+.bg-grass { background-color: #74CB48; }
+.bg-ground { background-color: #DEC16B; }
+.bg-ice { background-color: #9AD6DF; }
+.bg-poison { background-color: #A43E9E; }
+.bg-psychic { background-color: #FB5584; }
+.bg-rock { background-color: #B69E31; }
+.bg-steel { background-color: #B7B9D0; }
+.bg-water { background-color: #6493EB; }
+
+.text-red { color: #DC0A2D; }
+.text-white { color: #ffffff; }
+.text-gray { color: #EFEFEF; }
+.text-bug { color: #A7B723; }
+.text-dark { color: #75574C; }
+.text-dragon { color: #7037FF; }
+.text-electric { color: #F9CF30; }
+.text-fairy { color: #E69EAC; }
+.text-fighting { color: #C12239; }
+.text-fire { color: #F57D31; }
+.text-flying { color: #A891EC; }
+.text-ghost { color: #70559B; }
+.text-normal { color: #AAA67F; }
+.text-grass { color: #74CB48; }
+.text-ground { color: #DEC16B; }
+.text-ice { color: #9AD6DF; }
+.text-poison { color: #A43E9E; }
+.text-psychic { color: #FB5584; }
+.text-rock { color: #B69E31; }
+.text-steel { color: #B7B9D0; }
+.text-water { color: #6493EB; }

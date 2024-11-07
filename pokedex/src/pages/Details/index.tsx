@@ -55,11 +55,12 @@ const PokemonDetails = () => {
           </div>
         ) : (
           <div className="relative w-full max-w-full mx-auto">
-            <div className="absolute left-1/2 bottom-0 z-1 w-full max-w-[98vw] h-[75%] bg-gray rounded-2xl transform -translate-x-1/2 p-6">
+            <div className="absolute left-1/2 bottom-0 z-1 w-full max-w-[98vw]  h-[80%] bg-gray rounded-2xl transform -translate-x-1/2 p-6">
             {isFavorite() ? (
                     <IoHeart
                       data-testid="favorito"
                       className="text-red text-4xl hover:cursor-pointer"
+                      
                       onClick={() => setFavorites(pokemon)}
                     />
                   ) : (

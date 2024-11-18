@@ -6,6 +6,10 @@ export default defineConfig({
   plugins: [react()],
   test: {
     environment: 'jsdom',
+   
+    exclude: ['**/node_modules/**', '**/dist/**', './src/main.tsx', './src/App.tsx'],
+  
+  
   },
 
 })
